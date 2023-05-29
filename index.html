@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tabla de Registros</title>
+    <script>
+        // Función para obtener y mostrar los registros
+        function obtenerRegistros() {
+            fetch('http://localhost:5501/registros')
+                .then(response => response.json())
+                .then(data => {
+                    // Obtener la referencia a la tabla
+                    var tabla = document.getElementById('tabla-registros');
+
+                    // Recorrer los registros y crear las filas
+                    data.forEach(registro => {
+                        var fila = document.createElement('tr');
+
+                        // Crear las celdas y asignar los valores
+                        var idChatCell = document.createElement('td');
+                        idChatCell.textContent = registro.Id_Chat;
+                        fila.appendChild(idChatCell);
+
+                        var idUsuCell = document.createElement('td');
+                        idUsuCell.textContent = registro.Id_Usu;
+                        fila.appendChild(idUsuCell);
+
+                        var idUsu2Cell = document.createElement('td');
+                        idUsu2Cell.textContent = registro.Id_Usu2;
+                        fila.appendChild(idUsu2Cell);
+
+                        var mensajeCell = document.createElement('td');
+                        mensajeCell.textContent = registro.Mensaje;
+                        fila.appendChild(mensajeCell);
+
+                        // Agregar la fila a la tabla
+                        tabla.appendChild(fila);
+                    });
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+
+        // Llamar a la función obtenerRegistros al cargar la página
+        window.onload = obtenerRegistros;
+    </script>
+</head>
+<body>
+    <h1>Tabla de Registros</h1>
+
+    <table id="tabla-registros">
+        <thead>
+            <tr>
+                <th>Id Chat</th>
+                <th>Id Usuario</th>
+                <th>Id Usuario 2</th>
+                <th>Mensaje</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Las filas de la tabla se agregarán dinámicamente con JavaScript -->
+        </tbody>
+    </table>
+</body>
+</html>
+
